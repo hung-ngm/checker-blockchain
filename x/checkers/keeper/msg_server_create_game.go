@@ -20,8 +20,8 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 	newIndex := strconv.FormatUint(nextGame.IdValue, 10)
 	storedGame := types.StoredGame{
 		Index: newIndex,
-		Game: rules.New().String(),
-		Red: msg.Red,
+		Game:  rules.New().String(),
+		Red:   msg.Red,
 		Black: msg.Black,
 	}
 

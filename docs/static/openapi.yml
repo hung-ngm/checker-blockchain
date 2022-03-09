@@ -20030,6 +20030,19 @@ definitions:
     properties:
       idValue:
         type: string
+  minhhung123.checkers.checkers.MsgPlayMoveResponse:
+    type: object
+    properties:
+      idValue:
+        type: string
+      capturedX:
+        type: string
+        format: int64
+      capturedY:
+        type: string
+        format: int64
+      winner:
+        type: string
   minhhung123.checkers.checkers.NextGame:
     type: object
     properties:
