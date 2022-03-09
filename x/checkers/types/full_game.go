@@ -8,7 +8,7 @@ import (
 
 func (storedGame *StoredGame) GetRedAddress() (red sdk.AccAddress, err error) {
 	red, errRed := sdk.AccAddressFromBech32(storedGame.Red)
-	return red, sdkerrors.Wrapf(errRed, ErrInvalidRed.Error(),  storedGame.Red)
+	return red, sdkerrors.Wrapf(errRed, ErrInvalidRed.Error(), storedGame.Red)
 }
 
 func (storedGame *StoredGame) GetBlackAddress() (black sdk.AccAddress, err error) {
@@ -21,7 +21,7 @@ func (storedGame *StoredGame) ParseGame() (game *rules.Game, err error) {
 	if err != nil {
 		return game, sdkerrors.Wrapf(errGame, ErrGameNotParseable.Error())
 	}
-	game.Turn = rules.Player {
+	game.Turn = rules.Player{
 		Color: storedGame.Turn,
 	}
 	return game, nil
