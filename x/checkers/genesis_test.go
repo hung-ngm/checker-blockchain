@@ -14,6 +14,14 @@ func TestGenesis(t *testing.T) {
 		NextGame: &types.NextGame{
 			IdValue: 48,
 		},
+		StoredGameList: []types.StoredGame{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -23,5 +31,7 @@ func TestGenesis(t *testing.T) {
 	require.NotNil(t, got)
 
 	require.Equal(t, genesisState.NextGame, got.NextGame)
+	require.Len(t, got.StoredGameList, len(genesisState.StoredGameList))
+	require.Subset(t, genesisState.StoredGameList, got.StoredGameList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

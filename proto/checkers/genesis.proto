@@ -2,12 +2,15 @@ syntax = "proto3";
 package minhhung123.checkers.checkers;
 
 import "checkers/next_game.proto";
+import "checkers/stored_game.proto";
 // this line is used by starport scaffolding # genesis/proto/import
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/minhhung123/checkers/x/checkers/types";
 
 // GenesisState defines the checkers module's genesis state.
 message GenesisState {
     NextGame nextGame = 1;
+  repeated StoredGame storedGameList = 2 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

@@ -25,6 +25,8 @@ func GetQueryCmd(queryRoute string) *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdShowNextGame())
+	cmd.AddCommand(CmdListStoredGame())
+	cmd.AddCommand(CmdShowStoredGame())
 	// this line is used by starport scaffolding # 1
 
 	return cmd
