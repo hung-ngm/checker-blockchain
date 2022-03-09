@@ -9,6 +9,10 @@ import (
 // InitGenesis initializes the capability module's state from a provided genesis
 // state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
+	// Set if defined
+	if genState.NextGame != nil {
+		k.SetNextGame(ctx, *genState.NextGame)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 }
 
@@ -16,6 +20,11 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis := types.DefaultGenesis()
 
+	// Get all nextGame
+	nextGame, found := k.GetNextGame(ctx)
+	if found {
+		genesis.NextGame = &nextGame
+	}
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

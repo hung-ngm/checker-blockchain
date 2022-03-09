@@ -3,13 +3,24 @@ package minhhung123.checkers.checkers;
 
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
+import "checkers/next_game.proto";
 // this line is used by starport scaffolding # 1
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/minhhung123/checkers/x/checkers/types";
 
 // Query defines the gRPC querier service.
 service Query {
-    // this line is used by starport scaffolding # 2
+    // Queries a nextGame by index.
+	rpc NextGame(QueryGetNextGameRequest) returns (QueryGetNextGameResponse) {
+		option (google.api.http).get = "/minhhung123/checkers/checkers/nextGame";
+	}
+// this line is used by starport scaffolding # 2
 }
 
+message QueryGetNextGameRequest {}
+
+message QueryGetNextGameResponse {
+	NextGame NextGame = 1 [(gogoproto.nullable) = false];
+}
 // this line is used by starport scaffolding # 3

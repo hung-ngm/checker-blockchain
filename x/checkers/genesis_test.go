@@ -11,6 +11,9 @@ import (
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
+		NextGame: &types.NextGame{
+			IdValue: 48,
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -19,5 +22,6 @@ func TestGenesis(t *testing.T) {
 	got := checkers.ExportGenesis(ctx, *k)
 	require.NotNil(t, got)
 
+	require.Equal(t, genesisState.NextGame, got.NextGame)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
