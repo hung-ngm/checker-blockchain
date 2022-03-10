@@ -5,8 +5,8 @@ option go_package = "github.com/minhhung123/checkers/x/checkers/types";
 
 import "gogoproto/gogo.proto";
 
-
 message NextGame {
   uint64 idValue = 1; 
-  
+  string fifoHead = 2;
+  string fifoTail = 3;
 }
