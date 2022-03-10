@@ -14,5 +14,6 @@ message StoredGame {
   uint64 moveCount = 6;
   string beforeId = 7;
   string afterId = 8;
+  string deadline = 9;
 }
 

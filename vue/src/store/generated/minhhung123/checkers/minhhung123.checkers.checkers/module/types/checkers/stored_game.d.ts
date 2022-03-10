@@ -9,6 +9,7 @@ export interface StoredGame {
     moveCount: number;
     beforeId: string;
     afterId: string;
+    deadline: string;
 }
 export declare const StoredGame: {
     encode(message: StoredGame, writer?: Writer): Writer;

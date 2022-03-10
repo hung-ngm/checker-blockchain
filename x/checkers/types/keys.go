@@ -1,5 +1,9 @@
 package types
 
+import (
+	"time"
+)
+
 const (
 	// ModuleName defines the module name
 	ModuleName = "checkers"
@@ -23,7 +27,10 @@ func KeyPrefix(p string) []byte {
 
 const (
 	NextGameKey = "NextGame-value-"
+	MaxTurnDurationInSeconds = time.Duration(24 * 3_600 * 1000_000_000) // 1 Day
+	DeadlineLayout = "2006-01-02 15:04:05.999999999 + 0000 UTC"
 )
+
 
 const (
 	NoFifoIdKey = "-1"

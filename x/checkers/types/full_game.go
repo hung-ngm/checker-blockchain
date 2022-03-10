@@ -1,6 +1,7 @@
 package types
 
 import (
+	"time"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/minhhung123/checkers/x/checkers/rules"
@@ -26,6 +27,20 @@ func (storedGame *StoredGame) ParseGame() (game *rules.Game, err error) {
 	}
 	return game, nil
 }
+
+func (storedGame *StoredGame) GetDeadlineAsTime() (deadline time.Time, err error) {
+	deadline, errDeadline := time.Parse(DeadlineLayout, storedGame.Deadline)
+	return deadline, sdkerrors.Wrapf(errDeadline, ErrInvalidDeadline.Error(), storedGame.Deadline)
+}
+
+func GetNextDeadline(ctx sdk.Context) time.Time {
+	return ctx.BlockTime().Add(MaxTurnDurationInSeconds)
+}
+
+func FormatDeadline(deadline time.Time) string {
+	return deadline.UTC().Format(DeadlineLayout)
+}
+
 
 func (storedGame *StoredGame) Validate() (err error) {
 	_, err = storedGame.ParseGame()
