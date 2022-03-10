@@ -46,6 +46,7 @@ export interface CheckersStoredGame {
     beforeId?: string;
     afterId?: string;
     deadline?: string;
+    winner?: string;
 }
 export interface ProtobufAny {
     "@type"?: string;

@@ -6,6 +6,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/minhhung123/checkers/x/checkers/rules"
 	"github.com/minhhung123/checkers/x/checkers/types"
 )
 
@@ -16,6 +17,10 @@ func (k msgServer) RejectGame(goCtx context.Context, msg *types.MsgRejectGame) (
 	storedGame, found := k.Keeper.GetStoredGame(ctx, msg.IdValue)
 	if !found {
 		return nil, sdkerrors.Wrapf(types.ErrGameNotFound, "game not found: %s", msg.IdValue)
+	}
+
+	if storedGame.Winner != rules.NO_PLAYER.Color {
+		return nil, types.ErrGameFinished
 	}
 
 	// CHeck if the player is expected and did they already play

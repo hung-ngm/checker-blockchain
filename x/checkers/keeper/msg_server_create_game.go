@@ -25,6 +25,7 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 		Black: msg.Black,
 		MoveCount: 0,
 		Deadline: types.FormatDeadline(types.GetNextDeadline(ctx)),
+		Winner: rules.NO_PLAYER.Color,
 	}
 
 	err := storedGame.Validate()
