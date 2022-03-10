@@ -12562,6 +12562,9 @@ paths:
                       type: string
                     black:
                       type: string
+                    moveCount:
+                      type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -12686,6 +12689,9 @@ paths:
                     type: string
                   black:
                     type: string
+                  moveCount:
+                    type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -20043,6 +20049,8 @@ definitions:
         format: int64
       winner:
         type: string
+  minhhung123.checkers.checkers.MsgRejectGameResponse:
+    type: object
   minhhung123.checkers.checkers.NextGame:
     type: object
     properties:
@@ -20067,6 +20075,9 @@ definitions:
               type: string
             black:
               type: string
+            moveCount:
+              type: string
+              format: uint64
       pagination:
         type: object
         properties:
@@ -20117,6 +20128,9 @@ definitions:
             type: string
           black:
             type: string
+          moveCount:
+            type: string
+            format: uint64
   minhhung123.checkers.checkers.StoredGame:
     type: object
     properties:
@@ -20130,3 +20144,6 @@ definitions:
         type: string
       black:
         type: string
+      moveCount:
+        type: string
+        format: uint64

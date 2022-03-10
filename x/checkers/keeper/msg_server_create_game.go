@@ -23,6 +23,7 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 		Game:  rules.New().String(),
 		Red:   msg.Red,
 		Black: msg.Black,
+		MoveCount: 0,
 	}
 
 	err := storedGame.Validate()

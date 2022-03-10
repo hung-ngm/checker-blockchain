@@ -39,5 +39,5 @@ func (storedGame *StoredGame) Validate() (err error) {
 	}
 
 	_, err = storedGame.GetBlackAddress()
-	return err	
+	return err
 }

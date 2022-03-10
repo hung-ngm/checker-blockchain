@@ -2,8 +2,8 @@ package keeper
 
 import (
 	"context"
-	"strings"
 	"strconv"
+	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -51,6 +51,9 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		return nil, sdkerrors.Wrapf(moveErr, types.ErrWrongMove.Error())
 	}
 
+	storedGame.MoveCount++;
+
+	// Save for the next play move
 	storedGame.Game = game.String()
 	storedGame.Turn = game.Turn.Color
 	k.Keeper.SetStoredGame(ctx, storedGame)
@@ -67,11 +70,10 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		),
 	)
 
-
 	return &types.MsgPlayMoveResponse{
-		IdValue: msg.IdValue,
+		IdValue:   msg.IdValue,
 		CapturedX: int64(captured.X),
 		CapturedY: int64(captured.Y),
-		Winner: game.Winner().Color,
+		Winner:    game.Winner().Color,
 	}, nil
 }
