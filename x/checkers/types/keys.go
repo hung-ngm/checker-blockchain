@@ -58,3 +58,9 @@ const (
 	RejectGameEventCreator = "Creator"
 	RejectGameEventIdValue = "IdValue"
 )
+
+const (
+	ForfeitGameEventKey = "GameForfeited"
+	ForfeitGameEventIdValue = "IdValue"
+	ForfeitGameEventWinner = "Winner"
+)

@@ -20,4 +20,5 @@ var (
 	ErrBlackAlreadyPlayed = sdkerrors.Register(ModuleName, 1109, "black player has already played")
 	ErrInvalidDeadline = sdkerrors.Register(ModuleName, 1110, "deadline cannot be parsed: %s")
 	ErrGameFinished = sdkerrors.Register(ModuleName, 1111, "game is already finished")
+	ErrCannotFindWinnerByColor = sdkerrors.Register(ModuleName, 1114, "cannot find winner by color: %s")
 )
