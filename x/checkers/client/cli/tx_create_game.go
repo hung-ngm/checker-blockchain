@@ -19,8 +19,9 @@ func CmdCreateGame() *cobra.Command {
 		Short: "Broadcast message createGame",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argRed := args[0]
-			argBlack := args[1]
+			argRed := string(args[0])
+			argBlack := string(args[1])
+			argsWager, err := strconv.ParseUint(args[2], 10, 64)
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -29,8 +30,9 @@ func CmdCreateGame() *cobra.Command {
 
 			msg := types.NewMsgCreateGame(
 				clientCtx.GetFromAddress().String(),
-				argRed,
-				argBlack,
+				string(argRed),
+				string(argBlack),
+				argsWager,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

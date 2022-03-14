@@ -42,6 +42,7 @@ const (
 	StoredGameEventIndex   = "Index"
 	StoredGameEventRed     = "Red"
 	StoredGameEventBlack   = "Black"
+	StoredGameEventWager   = "Wager"
 )
 
 const (
