@@ -51,6 +51,8 @@ func (k msgServer) RejectGame(goCtx context.Context, msg *types.MsgRejectGame) (
 	k.Keeper.RemoveStoredGame(ctx, msg.IdValue)
 	k.Keeper.SetNextGame(ctx, nextGame)
 
+	ctx.GasMeter().ConsumeGas(types.RejectGameGas, "Reject game")
+
 	// Emit the Event
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(sdk.EventTypeMessage, 
