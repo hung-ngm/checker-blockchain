@@ -26,9 +26,9 @@ func KeyPrefix(p string) []byte {
 }
 
 const (
-	NextGameKey = "NextGame-value-"
+	NextGameKey              = "NextGame-value-"
 	MaxTurnDurationInSeconds = time.Duration(24 * 3_600 * 1000_000_000) // 1 Day
-	DeadlineLayout = "2006-01-02 15:04:05.999999999 + 0000 UTC"
+	DeadlineLayout           = "2006-01-02 15:04:05.999999999 + 0000 UTC"
 )
 
 const (
@@ -60,13 +60,13 @@ const (
 )
 
 const (
-	RejectGameEventKey = "GameRejected"
+	RejectGameEventKey     = "GameRejected"
 	RejectGameEventCreator = "Creator"
 	RejectGameEventIdValue = "IdValue"
 )
 
 const (
-	ForfeitGameEventKey = "GameForfeited"
+	ForfeitGameEventKey     = "GameForfeited"
 	ForfeitGameEventIdValue = "IdValue"
-	ForfeitGameEventWinner = "Winner"
+	ForfeitGameEventWinner  = "Winner"
 )

@@ -17,7 +17,7 @@ func (k *Keeper) CollectWager(ctx sdk.Context, storedGame *types.StoredGame) err
 		black, err := storedGame.GetBlackAddress()
 		if err != nil {
 			panic(err.Error())
-	
+
 		}
 		err = k.bank.SendCoinsFromAccountToModule(ctx, black, types.ModuleName, sdk.NewCoins(storedGame.GetWagerCoin()))
 		if err != nil {
@@ -36,7 +36,6 @@ func (k *Keeper) CollectWager(ctx sdk.Context, storedGame *types.StoredGame) err
 	}
 	return nil
 }
-
 
 func (k *Keeper) MustPayWinnings(ctx sdk.Context, storedGame *types.StoredGame) {
 	winnerAddress, found, err := storedGame.GetWinnerAddress()
@@ -58,7 +57,6 @@ func (k *Keeper) MustPayWinnings(ctx sdk.Context, storedGame *types.StoredGame) 
 	}
 
 }
-
 
 // Game must be in a state where it can be refunded
 func (k *Keeper) MustRefundWager(ctx sdk.Context, storedGame *types.StoredGame) {

@@ -1,10 +1,10 @@
 package types
 
 import (
-	"time"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/minhhung123/checkers/x/checkers/rules"
+	"time"
 )
 
 func (storedGame *StoredGame) GetRedAddress() (red sdk.AccAddress, err error) {
@@ -51,7 +51,7 @@ func (storedGame *StoredGame) GetPlayerAddress(color string) (address sdk.AccAdd
 		return nil, false, err
 	}
 	address, found = map[string]sdk.AccAddress{
-		rules.RED_PLAYER.Color: red,
+		rules.RED_PLAYER.Color:   red,
 		rules.BLACK_PLAYER.Color: black,
 	}[color]
 	return address, found, nil
@@ -65,7 +65,6 @@ func (storedGame *StoredGame) GetWinnerAddress() (address sdk.AccAddress, found 
 func (storedGame *StoredGame) GetWagerCoin() (wager sdk.Coin) {
 	return sdk.NewCoin(sdk.DefaultBondDenom, sdk.NewInt(int64(storedGame.Wager)))
 }
-
 
 func (storedGame *StoredGame) Validate() (err error) {
 	_, err = storedGame.ParseGame()

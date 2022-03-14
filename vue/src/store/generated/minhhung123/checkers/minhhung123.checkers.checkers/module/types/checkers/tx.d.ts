@@ -4,6 +4,7 @@ export interface MsgCreateGame {
     creator: string;
     red: string;
     black: string;
+    wager: number;
 }
 export interface MsgCreateGameResponse {
     idValue: string;

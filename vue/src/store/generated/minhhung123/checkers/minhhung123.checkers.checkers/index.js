@@ -40,6 +40,7 @@ const getDefaultState = () => {
         NextGame: {},
         StoredGame: {},
         StoredGameAll: {},
+        CanPlayMove: {},
         _Structure: {
             NextGame: getStructure(NextGame.fromPartial({})),
             StoredGame: getStructure(StoredGame.fromPartial({})),
@@ -84,6 +85,12 @@ export default {
                 params.query = null;
             }
             return state.StoredGameAll[JSON.stringify(params)] ?? {};
+        },
+        getCanPlayMove: (state) => (params = { params: {} }) => {
+            if (!params.query) {
+                params.query = null;
+            }
+            return state.CanPlayMove[JSON.stringify(params)] ?? {};
         },
         getTypeStructure: (state) => (type) => {
             return state._Structure[type].fields;
@@ -155,6 +162,23 @@ export default {
             }
             catch (e) {
                 throw new SpVuexError('QueryClient:QueryStoredGameAll', 'API Node Unavailable. Could not perform query: ' + e.message);
+            }
+        },
+        async QueryCanPlayMove({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params: { ...key }, query = null }) {
+            try {
+                const queryClient = await initQueryClient(rootGetters);
+                let value = (await queryClient.queryCanPlayMove(query)).data;
+                while (all && value.pagination && value.pagination.nextKey != null) {
+                    let next_values = (await queryClient.queryCanPlayMove({ ...query, 'pagination.key': value.pagination.nextKey })).data;
+                    value = mergeResults(value, next_values);
+                }
+                commit('QUERY', { query: 'CanPlayMove', key: { params: { ...key }, query }, value });
+                if (subscribe)
+                    commit('SUBSCRIBE', { action: 'QueryCanPlayMove', payload: { options: { all }, params: { ...key }, query } });
+                return getters['getCanPlayMove']({ params: { ...key }, query }) ?? {};
+            }
+            catch (e) {
+                throw new SpVuexError('QueryClient:QueryCanPlayMove', 'API Node Unavailable. Could not perform query: ' + e.message);
             }
         },
         async sendMsgCreateGame({ rootGetters }, { value, fee = [], memo = '' }) {

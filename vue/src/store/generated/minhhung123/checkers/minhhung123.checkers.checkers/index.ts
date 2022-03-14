@@ -47,6 +47,7 @@ const getDefaultState = () => {
 				NextGame: {},
 				StoredGame: {},
 				StoredGameAll: {},
+				CanPlayMove: {},
 				
 				_Structure: {
 						NextGame: getStructure(NextGame.fromPartial({})),
@@ -95,6 +96,12 @@ export default {
 						(<any> params).query=null
 					}
 			return state.StoredGameAll[JSON.stringify(params)] ?? {}
+		},
+				getCanPlayMove: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.CanPlayMove[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -188,6 +195,31 @@ export default {
 				return getters['getStoredGameAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new SpVuexError('QueryClient:QueryStoredGameAll', 'API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryCanPlayMove({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params: {...key}, query=null }) {
+			try {
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryCanPlayMove(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.nextKey!=null) {
+					let next_values=(await queryClient.queryCanPlayMove({...query, 'pagination.key':(<any> value).pagination.nextKey})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'CanPlayMove', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryCanPlayMove', payload: { options: { all }, params: {...key},query }})
+				return getters['getCanPlayMove']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new SpVuexError('QueryClient:QueryCanPlayMove', 'API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

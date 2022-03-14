@@ -55,7 +55,7 @@ func (k msgServer) RejectGame(goCtx context.Context, msg *types.MsgRejectGame) (
 
 	// Emit the Event
 	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(sdk.EventTypeMessage, 
+		sdk.NewEvent(sdk.EventTypeMessage,
 			sdk.NewAttribute(sdk.AttributeKeyModule, "checkers"),
 			sdk.NewAttribute(sdk.AttributeKeyAction, types.RejectGameEventKey),
 			sdk.NewAttribute(types.RejectGameEventCreator, msg.Creator),

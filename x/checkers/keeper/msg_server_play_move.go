@@ -63,7 +63,7 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		return nil, sdkerrors.Wrapf(moveErr, types.ErrWrongMove.Error())
 	}
 
-	storedGame.MoveCount++;
+	storedGame.MoveCount++
 	storedGame.Deadline = types.FormatDeadline(types.GetNextDeadline(ctx))
 	storedGame.Winner = game.Winner().Color
 
@@ -80,7 +80,6 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		// Pay the winnings to the winner
 		k.Keeper.MustPayWinnings(ctx, &storedGame)
 	}
-	
 
 	// Save for the next play move
 	storedGame.Game = game.String()

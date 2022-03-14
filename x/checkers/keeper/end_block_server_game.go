@@ -1,12 +1,12 @@
 package keeper
 
 import (
-	"fmt"
 	"context"
-	"strings"
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	rules "github.com/minhhung123/checkers/x/checkers/rules"
 	"github.com/minhhung123/checkers/x/checkers/types"
+	"strings"
 )
 
 func (k Keeper) ForfeitExpiredGames(goCtx context.Context) {
@@ -38,7 +38,7 @@ func (k Keeper) ForfeitExpiredGames(goCtx context.Context) {
 		}
 		if deadline.Before(ctx.BlockTime()) {
 			// Game is past deadline
-			k.RemoveFromFifo(ctx,&storedGame, &nextGame)
+			k.RemoveFromFifo(ctx, &storedGame, &nextGame)
 
 			// Check if the game is kept
 			if storedGame.MoveCount == 0 {
@@ -57,7 +57,7 @@ func (k Keeper) ForfeitExpiredGames(goCtx context.Context) {
 				k.SetStoredGame(ctx, storedGame)
 			}
 			ctx.EventManager().EmitEvent(
-				sdk.NewEvent(sdk.EventTypeMessage, 
+				sdk.NewEvent(sdk.EventTypeMessage,
 					sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
 					sdk.NewAttribute(sdk.AttributeKeyAction, types.ForfeitGameEventKey),
 					sdk.NewAttribute(types.ForfeitGameEventIdValue, storedGameId),
